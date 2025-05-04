@@ -43,7 +43,28 @@ const fs = require("fs");
 // fs.unlinkSync("./copy.txt");
 
 // stat
-console.log(fs.statSync("./test.txt"));
+// console.log(fs.statSync("./test.txt"));
 
 // mkdir
 // fs.mkdirSync("my-docs/testCase", { recursive: true });
+
+//! Lecture 6 : Node Js Architecture
+// Blocking Request : (Sync)
+// console.log("1");
+// const res = fs.readFileSync("./contacts.txt", "utf-8");
+// console.log(res);
+// console.log("2");
+// Output : 1 , [Data], 2
+
+// Non-Blocking Request : (Async)
+console.log("1");
+fs.readFile("./contacts.txt", "utf-8", (err, res) => {
+  if (err) {
+    console.log("Error", err);
+  } else {
+    console.log(res);
+  }
+});
+console.log("2");
+
+// Output : 1, 2, [Data]
